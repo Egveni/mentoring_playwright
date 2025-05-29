@@ -1,1 +1,1 @@
-print("Hi")
+print("Hi there, this is a test script!")
