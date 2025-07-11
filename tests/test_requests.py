@@ -6,7 +6,7 @@ from src.enum.global_enums import GlobalErrorMessages
 
 def test_getting_post():
     response = requests.get(url=SERVICE_URL)
-    assert response.status_code == 200
+    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
     json_data = response.json()
     print(json_data)
 
@@ -27,7 +27,7 @@ def test_authentication():
 
 def test_getting2_post():
     response = requests.get(url=SERVICE_URL + "895")
-    assert response.status_code == 200
+    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
     json_data = response.json()
     print(json_data)
 
@@ -52,7 +52,7 @@ def test_post_request():
         headers={'Content-Type': 'application/json'}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
     
     data = response.json()
     
@@ -105,7 +105,7 @@ def test_put_request():
         headers=headers
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
 
     data = response.json()
 
