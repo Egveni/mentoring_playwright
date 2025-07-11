@@ -1,6 +1,7 @@
 
 import requests
 from src.configuration import SERVICE_URL
+from src.test_tools import get_first_booking_id
 
 from src.enum.global_enums import GlobalErrorMessages
 
@@ -25,8 +26,9 @@ def test_authentication():
     print(f"Token: {token}")
 
 
-def test_getting2_post():
-    response = requests.get(url=SERVICE_URL + "895")
+def test_get_one_booking():
+    first_booking_id = get_first_booking_id(SERVICE_URL)
+    response = requests.get(url=SERVICE_URL+f"{first_booking_id}")
     assert response.status_code == 200
     json_data = response.json()
     print(json_data)
