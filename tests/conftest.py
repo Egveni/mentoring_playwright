@@ -1,8 +1,23 @@
 import pytest
-import requests
+
+from random import randrange
+
+@pytest.fixture()
+def get_number():
+    return randrange(1, 1000)
 
 
-@pytest.fixture
-def get_users():
-    response = requests.get("https://gorest.co.in/public/v1/users")
-    return response
+def _calculate(a, b):
+    return a + b
+
+
+@pytest.fixture()
+def calculate():
+    return _calculate
+
+@pytest.fixture()
+def make_number():
+    print("I'm getting number")
+    number = randrange(1, 1000)
+    yield
+    print(f"I'm done with number {number}")
