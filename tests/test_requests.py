@@ -1,28 +1,19 @@
 
 import requests
 from src.configuration import SERVICE_URL
-from src.test_tools import get_first_booking_id
+from src.test_tools import get_first_booking_id, get_auth_token
 
 from src.enum.global_enums import GlobalErrorMessages
 
-def test_getting_post():
+def test_get_all_bookings():
     response = requests.get(url=SERVICE_URL)
     assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
     json_data = response.json()
-    print(json_data)
+#    print(json_data)
 
 
 def test_authentication():
-    
-    auth_url = "https://restful-booker.herokuapp.com/auth"
-    data = {
-        "username": "admin",
-        "password": "password123"
-    }
-
-    auth_response = requests.post(auth_url, json=data)
-
-    token = auth_response.json().get("token")
+    token = get_auth_token()
     print(f"Token: {token}")
 
 
@@ -32,11 +23,11 @@ def test_get_one_booking():
     assert response.status_code == 200
 
 
-def test_getting2_post():
-    response = requests.get(url=SERVICE_URL + "895")
-    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
-    json_data = response.json()
-    print(json_data)
+#def test_getting2_post():
+#    response = requests.get(url=SERVICE_URL + "895")
+#    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
+ #   json_data = response.json()
+ #   print(json_data)
 
 
 def test_post_request():
@@ -106,8 +97,9 @@ def test_put_request():
         'Cookie': f'token={token}'
     }
 
+    first_booking_id = get_first_booking_id(SERVICE_URL)
     response = requests.put(
-        url=SERVICE_URL + "895",
+        url=SERVICE_URL + f"{first_booking_id}",
         json=payload,
         headers=headers
     )
@@ -124,7 +116,7 @@ def test_put_request():
     assert data['bookingdates']['checkout'] == payload['bookingdates']['checkout']
     assert data['additionalneeds'] == payload['additionalneeds']
 
-    print(f"Updated booking with ID: 895")
+    print(f"Updated booking with ID: {first_booking_id}")
     print(f"Response data: {data}")
 
 
@@ -146,13 +138,14 @@ def test_delete_request():
         "Content-Type": "application/json",
         "Cookie": f"token={token}"
     }
-
-    response = requests.delete(SERVICE_URL + "3", headers=headers)
+    
+    first_booking_id = get_first_booking_id(SERVICE_URL)
+    response = requests.delete(SERVICE_URL + f"{first_booking_id}", headers=headers)
 
     assert response.status_code == 201 or response.status_code == 200, \
         f"Expected 200/201, got {response.status_code}"
 
-    print(f"Booking 720 deleted. Status code: {response.status_code}")
+    print(f"Booking {first_booking_id} deleted. Status code: {response.status_code}")
 
 def test_healthcheck_get():
     
@@ -192,8 +185,8 @@ def test_patch_existing_booking():
         "Cookie": f"token={token}"
     }
 
-    booking_id = "231"
-    response = requests.patch(url=SERVICE_URL + booking_id, json=patch_data, headers=headers)
+    first_booking_id = get_first_booking_id(SERVICE_URL)
+    response = requests.patch(url=SERVICE_URL + f"{first_booking_id}", json=patch_data, headers=headers)
 
     assert response.status_code == 200, f"PATCH failed: {response.status_code}, Response: {response.text}"
 
@@ -201,5 +194,5 @@ def test_patch_existing_booking():
     assert updated["firstname"] == patch_data["firstname"]
     assert updated["lastname"] == patch_data["lastname"]
 
-    print(f"Booking {booking_id} успешно обновлён.")
+    print(f"Booking {first_booking_id} успешно обновлён.")
     print("Обновлённые данные:", updated)

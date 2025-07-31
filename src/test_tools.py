@@ -11,6 +11,22 @@ def get_first_booking_id(SERVICE_URL):
         else:
             return json_data[0]['bookingid']
 
+def get_auth_token(username="admin", password="password123"):
+    auth_url = "https://restful-booker.herokuapp.com/auth"
+    data = {
+        "username": username,
+        "password": password
+    }
+    
+    auth_response = requests.post(auth_url, json=data)
+    
+    token = auth_response.json().get("token")
+    
+    if not token:
+        raise Exception("Токен не получен")
+    else:
+        print(f"Токен получен: {token}")    
+        return token
     
 #var = ['a',3,True]
 #var4 = var[0] #'a'
