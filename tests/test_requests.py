@@ -1,7 +1,7 @@
 
 import requests
 from src.configuration import SERVICE_URL
-from src.test_tools import get_first_booking_id
+from src.test_tools import get_first_booking_id, get_auth_token
 
 from src.enum.global_enums import GlobalErrorMessages
 
@@ -13,17 +13,7 @@ def test_get_all_bookings():
 
 
 def test_authentication():
-    token = get_auth_token(username="admin", password="password123")
-    
-    auth_url = "https://restful-booker.herokuapp.com/auth"
-    data = {
-        "username": "admin",
-        "password": "password123"
-    }
-
-    auth_response = requests.post(auth_url, json=data)
-
-    token = auth_response.json().get("token")
+    token = get_auth_token()
     print(f"Token: {token}")
 
 
