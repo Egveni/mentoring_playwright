@@ -7,6 +7,9 @@ from src.generators.player_localization import PlayerLocalization
 
 from src.schemas.user import User
 
+from src.schemas.computer import Computer
+from computer_json import computer 
+
 
 def test_getting_users_list(get_users, make_number):
     Response(get_users).assert_status_code(200).validate(User)
@@ -73,3 +76,8 @@ def test_something2(get_player_generator, localizations):
         ['localize', localizations], PlayerLocalization('fr_FR').set_number(15).build()
     ).build()
     print(object_to_send)
+
+
+def test_pydentic_object():
+    comp = Computer.model_validate(computer)
+    print(comp.detailed_info) 

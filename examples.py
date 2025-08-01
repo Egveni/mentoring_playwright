@@ -7,3 +7,4 @@ player = {
     },
     "avatar": "https://google.com/"
 }
+
