@@ -59,7 +59,7 @@ def test_get_one_booking():
 
 
 #постим и сразу проверяем, что запостился с корректной структурой
-def test_post_request():
+def test_post_booking():
     
     payload = {
         "firstname": "Jim",
