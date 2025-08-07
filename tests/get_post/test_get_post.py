@@ -26,9 +26,7 @@ def test_get_all_bookings_with_validation():
     
     json_data = response.json()
     
-    # Валидируем структуру массива через Pydantic
     try:
-        # Создаем валидатор для списка букингов
         bookings_validator = TypeAdapter(List[Booking])
         validated_bookings = bookings_validator.validate_python(json_data)
         

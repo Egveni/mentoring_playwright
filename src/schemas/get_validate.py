@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from datetime import date
 from typing import List
 
+
 class Booking(BaseModel): 
     bookingid: int
 
@@ -25,6 +26,8 @@ class Booking_one(BaseModel):
 class CreatedBookingResponse(BaseModel):
     bookingid: int
     booking: Booking_one
+
+
 # {
 #     "firstname": "Sally",
 #     "lastname": "Brown",
