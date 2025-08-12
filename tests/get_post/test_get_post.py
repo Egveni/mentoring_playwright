@@ -1,7 +1,7 @@
 
 import requests
-from src.configuration import SERVICE_URL
-from src.test_tools import get_first_booking_id
+from src.configuration import SERVICE_URL, PING_URL
+from tools_for_tests import get_first_booking_id
 
 from src.enum.global_enums import GlobalErrorMessages
 from src.schemas.get_validate import Booking, BookingDates, Booking_one, CreatedBookingResponse
@@ -91,7 +91,7 @@ def test_post_booking():
 
 def test_healthcheck_get():
     
-    response = requests.get(url="https://restful-booker.herokuapp.com/ping")
+    response = requests.get(url=PING_URL)
     
     assert response.status_code == 201 or response.status_code == 200, \
         f"Expected 200/201, got {response.status_code}"

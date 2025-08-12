@@ -8,7 +8,7 @@ from src.generators.player_localization import PlayerLocalization
 from src.schemas.user import User
 
 from src.schemas.computer import Computer
-from computer_json import computer 
+from jsonExamples.computer_json import computer 
 
 
 def test_getting_users_list(get_users, make_number):
