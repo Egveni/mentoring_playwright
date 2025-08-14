@@ -7,7 +7,7 @@ from pydantic_extra_types.color import Color
 
 from pydantic_extra_types.payment import PaymentCardNumber
 
-from examples import computer
+from jsonExamples.examples import computer
 
 from src.enum.user_enums import Statuses, UserErrors
 
