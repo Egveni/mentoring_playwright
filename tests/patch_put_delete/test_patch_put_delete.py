@@ -3,6 +3,7 @@ import requests
 from src.configuration import SERVICE_URL
 from src.tools_for_tests import get_first_booking_id, create_booking, delete_booking
 from src.schemas.get_validate import Booking_one, Booking
+from pydantic import TypeAdapter, ValidationError
 
 
 
@@ -88,5 +89,4 @@ def test_patch_booking(auth_token, create_delete_booking):
         f"PATCH failed: {response.status_code}, Response: {response.text}"
 
     json_data = response.json()
-    validated_response = Booking_one(**json_data)
-
+    TypeAdapter(Booking_one).validate_python(json_data)

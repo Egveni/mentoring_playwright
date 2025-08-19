@@ -32,9 +32,9 @@ def test_get_all_bookings_with_validation():
         
         # Выводим информацию о валидированных данных
         print(f"Successfully validated {len(validated_bookings)} bookings")
-    except ValidationError as e:
-            print(f" Validation failed: {e}")
-            raise AssertionError(f"Booking validation failed: {e}")
+    except ValidationError as error:
+            print(f" Validation failed: {error}")
+            raise AssertionError(f"Booking validation failed: {error}")
 
 
 #выводим один и сразу валидация его полей
@@ -46,10 +46,8 @@ def test_get_one_booking():
 
         json_data = response.json()
         # Создаем валидатор для списка букингов
-        booking_validator = TypeAdapter(Booking_one)
-        validated_booking = booking_validator.validate_python(json_data)
+        TypeAdapter(Booking_one).validate_python(json_data)
         
-        # Выводим информацию о валидированных данных
         print(f"Successfully validated booking with ID: {first_booking_id}")
     
     except ValidationError as e:

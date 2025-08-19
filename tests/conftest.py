@@ -1,16 +1,24 @@
 import pytest
 import requests
+import os
+from dotenv import load_dotenv
 from tools_for_tests import create_booking, delete_booking
 
 from src.configuration import SERVICE_URL
 
+
+load_dotenv()
+
 @pytest.fixture(scope="session")
 def auth_token():
-    """Получает токен авторизации для всей сессии тестов"""
     auth_url = "https://restful-booker.herokuapp.com/auth"
+
+    username = os.getenv("YOUR_LOGIN")
+    password = os.getenv("YOUR_PASSWORD")
+
     data = {
-        "username": "admin",
-        "password": "password123"
+        "username": f"{username}",
+        "password": f"{password}"
     }
     
     auth_response = requests.post(auth_url, json=data)

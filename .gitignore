@@ -189,3 +189,10 @@ cython_debug/
 
 #My files
 allure-results/
+
+# .gitignore
+.env
+.env.local
+.env.production
+__pycache__/
+*.pyc
