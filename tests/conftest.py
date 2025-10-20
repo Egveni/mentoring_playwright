@@ -34,7 +34,17 @@ def auth_token():
 @pytest.fixture
 def create_delete_booking():
     booking_id = create_booking()
+
     print(f"Booking created with id: {booking_id}")
     yield booking_id
+
     delete_booking(auth_token, booking_id, SERVICE_URL)
     print(f"\nBooking deleted with id: {booking_id}")
+
+
+
+@pytest.fixture
+def page(context):
+    page: Page = context.new_page()
+    page.set_viewport_size({"width": 1920, "height": 1080})
+    yield page

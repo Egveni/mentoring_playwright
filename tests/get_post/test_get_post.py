@@ -10,11 +10,11 @@ from typing import List
 
 
 
-# def test_get_all_bookings():
-#     response = requests.get(url=SERVICE_URL)
-#     assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
-#     json_data = response.json()
-#     # print(json_data)
+def test_get_all_bookings():
+    response = requests.get(url=SERVICE_URL)
+    assert response.status_code == 200, GlobalErrorMessages.WRONG_STATUS_CODE.value
+    json_data = response.json()
+    print(json_data)
 
 
 

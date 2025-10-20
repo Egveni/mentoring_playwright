@@ -1,4 +1,26 @@
-def welcome_message():
-    print("Welcome to the new repo, Ksenia!")
+import re
+from playwright.sync_api import Playwright, sync_playwright, expect
 
-welcome_message()
+
+def run(playwright: Playwright) -> None:
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    page.goto("https://demo.playwright.dev/todomvc/#/")
+    page.get_by_role("textbox", name="What needs to be done?").click()
+    page.get_by_role("textbox", name="What needs to be done?").fill("create a new scenario")
+    page.get_by_role("textbox", name="What needs to be done?").press("Enter")
+    page.get_by_role("textbox", name="What needs to be done?").fill("create a list")
+    page.get_by_role("textbox", name="What needs to be done?").press("Enter")
+    page.get_by_text("create a list").click()
+    page.get_by_role("listitem").filter(has_text="create a list").get_by_label("Toggle Todo").check()
+    page.get_by_role("link", name="Active").click()
+    page.get_by_role("checkbox", name="Toggle Todo").check()
+
+    # ---------------------
+    context.close()
+    browser.close()
+
+
+with sync_playwright() as playwright:
+    run(playwright)
