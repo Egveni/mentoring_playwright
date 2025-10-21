@@ -186,3 +186,13 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+#My files
+allure-results/
+
+# .gitignore
+.env
+.env.local
+.env.production
+__pycache__/
+*.pyc
