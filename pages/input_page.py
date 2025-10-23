@@ -1,18 +1,18 @@
-from playwright.sync_api import Playwright, sync_playwright, expect, Page
+from playwright.sync_api import expect
 from  pages.hello_page import BasePage
 
-LINK = "#submit-id-submit"
+LINK = "#"
 RESULT = "#id_text_string"
 
 
 class SimplePage(BasePage):
     URL = "https://www.qa-practice.com/"
 
-    def check_placeholder(self, text):
+    def check_placeholder(self):
         link = self.page.locator(LINK)
         link.click()
         result = self.page.locator(RESULT)
-        expect(result).to_have_text(text)
+        expect(result).to_have_text("Submit me")
 
     # def click_button(self):
     #     button = self.page.locator(BUTTON)
