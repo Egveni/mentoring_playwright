@@ -1,13 +1,14 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from pages.main_page import MainPage
 
 
 def test_welcome_text(page: Page):
-    page.goto("https://www.qa-practice.com")
-    expect(page.get_by_text("Hello!")).to_have_text("Hello!")
+    input_page = MainPage(page)
+    input_page.open_base_page()
+    input_page.check_welcome_text()
 
 
 def test_text_input(page: Page):
-    page.goto("https://www.qa-practice.com")
-    page.get_by_role("link", name="Text input").click()
-    expect(page).to_have_url("https://www.qa-practice.com/elements/input/simple")
-    expect(page.get_by_role("heading", name="Input field")).to_be_visible()
+    input_page = MainPage(page)
+    input_page.open_base_page()
+    input_page.text_input_clickable()

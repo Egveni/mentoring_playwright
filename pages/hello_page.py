@@ -1,14 +1,13 @@
-from playwright.sync_api import Page
 
 
 class BasePage:
     URL = None
     
-    def __init__(self, page: Page):
+    def __init__(self, page):
         self.page = page
 
 
-    def open(self):
+    def open_page(self):
         if self.URL:
             self.page.goto(self.URL)
         else:   
