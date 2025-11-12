@@ -9,10 +9,8 @@ from pages.email_page import EmailPage
     ("user.name@example.co.uk"),
     ("test+tag@example.com"),
 ])
-def test_email_validation_no_error(page: Page, email):
-    email_page = EmailPage(page)
+def test_email_validation_no_error(email_page, email):
     email_page.open_page()
-    email_page.navigate_to_text_input_page()
     email_page.navigate_to_email_page()
     email_page.check_email_validation_no_error(email)
 
@@ -22,10 +20,8 @@ def test_email_validation_no_error(page: Page, email):
     ("invalid@"),
     ("@example.com"),
 ])
-def test_email_validation_with_error(page: Page, email):
-    email_page = EmailPage(page)
+def test_email_validation_with_error(email_page, email):
     email_page.open_page()
-    email_page.navigate_to_text_input_page()
     email_page.navigate_to_email_page()
     email_page.check_email_validation_with_error(email)
 
@@ -37,10 +33,8 @@ def test_email_validation_with_error(page: Page, email):
     ("invalid", False),
     ("test@example.com", True),
 ])
-def test_email_localhost_allowed(page: Page, email, should_pass):
-    email_page = EmailPage(page)
+def test_email_localhost_allowed(email_page, email, should_pass):
     email_page.open_page()
-    email_page.navigate_to_text_input_page()
     email_page.navigate_to_email_page()
     try:
         email_page.check_email_localhost_no_error(email, should_pass)

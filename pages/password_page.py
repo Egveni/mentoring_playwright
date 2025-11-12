@@ -5,10 +5,7 @@ from  pages.hello_page import BasePage
 class PasswordPage(BasePage):
 
     URL = "https://www.qa-practice.com/"
-
-    def open_base_page(self):
-        self.open_page()
-
+    
     def navigate_to_password_page(self):
         self.page.get_by_role("link", name="Text input").click()
         self.page.get_by_role("link", name="Password").click()

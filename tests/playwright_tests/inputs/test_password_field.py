@@ -2,8 +2,7 @@ import pytest
 from playwright.sync_api import Page
 from pages.password_page import PasswordPage
 
-def test_user_can_submit_form_by_pressing_enter_text_displayed(page: Page):
-    password_page = PasswordPage(page)
+def test_user_can_submit_form_by_pressing_enter_text_displayed(password_page):
     password_page.open_page()
     password_page.navigate_to_password_page()
     password_page.check_password_field_working()
@@ -21,8 +20,7 @@ def test_user_can_submit_form_by_pressing_enter_text_displayed(page: Page):
     ("MyPass@123", True),
     ("Test#5678", True),
 ])
-def test_password_validation(page: Page, password, should_pass):
-    password_page = PasswordPage(page)
+def test_password_validation(password_page, password, should_pass):
     password_page.open_page()
     password_page.navigate_to_password_page() 
     try:
