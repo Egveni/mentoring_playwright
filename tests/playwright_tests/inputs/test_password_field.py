@@ -23,7 +23,7 @@ def test_user_can_submit_form_by_pressing_enter_text_displayed(password_page):
 def test_password_validation(password_page, password, should_pass):
     password_page.open_page()
     password_page.navigate_to_password_page() 
-    try:
+    if should_pass:
         password_page.check_password_validation_no_error(password, should_pass)
-    except Exception as e:
+    else:
         password_page.check_password_validation_with_error(password, should_pass)

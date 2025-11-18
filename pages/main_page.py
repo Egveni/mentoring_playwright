@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 from  pages.hello_page import BasePage
+from pages.base_locators import text_input_page_locators, simple_button_page_locators
 
 
 class MainPage(BasePage):
@@ -9,12 +10,12 @@ class MainPage(BasePage):
         expect(self.page.get_by_text("Hello!")).to_have_text("Hello!")
 
     def text_input_clickable(self):
-        self.page.get_by_role("link", name="Text input").click()
+        self.page.get_by_role(text_input_page_locators["text_input"]).click()
         expect(self.page).to_have_url("https://www.qa-practice.com/elements/input/simple")
         expect(self.page.get_by_role("heading", name="Input field")).to_be_visible()
 
     def simple_button_clickable(self):
-        self.page.get_by_role("link", name="Simple button").click()
+        self.page.get_by_role(simple_button_page_locators["simple_button_link"]).click()
         expect(self.page).to_have_url("https://www.qa-practice.com/elements/button/simple")
         expect(self.page.get_by_role("heading", name="Buttons")).to_be_visible()
-        expect(self.page.get_by_role("link", name="Simple Button")).to_be_visible()
+        expect(self.page.get_by_role(simple_button_page_locators["simple_button_link"])).to_be_visible()
