@@ -11,6 +11,8 @@ from pages.simple_button import SimpleButton
 from pages.disabled_page import DisabledButton
 from pages.main_page import MainPage
 from pages.password_page import PasswordPage
+from pages.single_checkbox import SingleCheckboxPage
+from pages.checkboxes import CheckboxesPage
 from src.configuration import SERVICE_URL
 
 
@@ -97,5 +99,17 @@ def looks_like_button_page(browser_page: Page):
 @pytest.fixture
 def disabled_button_page(browser_page: Page):
     simple_page = DisabledButton(browser_page)
+    yield simple_page
+    browser_page.context.clear_cookies()
+
+@pytest.fixture
+def single_checkbox_page(browser_page: Page):
+    simple_page = SingleCheckboxPage(browser_page)
+    yield simple_page
+    browser_page.context.clear_cookies()
+
+@pytest.fixture
+def checkboxes_page(browser_page: Page):
+    simple_page = CheckboxesPage(browser_page)
     yield simple_page
     browser_page.context.clear_cookies()

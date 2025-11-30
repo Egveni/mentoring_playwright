@@ -25,3 +25,14 @@ simple_button_page_locators = {
     "click_button_result": "#result-text",
     "selector": "#id_select_state"
 }
+
+checkbox_page_locators = {
+    "single_checkbox_link": "Single Checkbox",
+    "single_checkbox": "#id_checkbox_0",
+    "submit_button": "#submit-id-submit",
+    "submit_button_result": "#result-text",
+    "checkboxes_tab": "Checkboxes",
+    "checkbox_1": "#id_checkboxes_0",
+    "checkbox_2": "#id_checkboxes_1",
+    "checkbox_3": "#id_checkboxes_2"
+}
